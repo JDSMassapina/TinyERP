@@ -5,17 +5,16 @@
     using System;
     using System.Collections.Generic;
 
-    public class UpdateUserGroupRequest : BaseContent, IMappedFrom<App.Entity.Security.UserGroup>
+    public class CreateUserGroupRequest : BaseContent, IMappedFrom<App.Entity.Security.UserGroup>
     {
         public IList<Guid> Permissions { get; set; }
-        public UpdateUserGroupRequest() : base()
+        public CreateUserGroupRequest() : base()
         {
             this.Permissions = new List<Guid>();
         }
 
-        public UpdateUserGroupRequest(Guid id, string name, string desc) : base()
+        public CreateUserGroupRequest(string name, string desc) : base()
         {
-            this.Id = id;
             this.Name = name;
             this.Description = desc;
             this.Permissions = new List<Guid>();

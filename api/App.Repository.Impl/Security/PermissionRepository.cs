@@ -35,5 +35,11 @@
             Guid roleItemId = Guid.Parse(roleId);
             return this.DbSet.AsQueryable().Where(item => item.Roles.Any(role => role.Id == roleItemId)).ToList();
         }
+
+        public IList<Permission> GetByUserGroupId(string userGroupId)
+        {
+            Guid userGroupItemId = Guid.Parse(userGroupId);
+            return this.DbSet.AsQueryable().Where(item => item.UserGroups.Any(userGroup => userGroup.Id == userGroupItemId)).ToList();
+        }
     }
 }

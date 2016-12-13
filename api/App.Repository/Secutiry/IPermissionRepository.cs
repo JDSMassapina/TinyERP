@@ -10,5 +10,6 @@
         System.Collections.Generic.IList<TResult> GetPermissions<TResult>() where TResult : IMappedFrom<Permission>;
         System.Collections.Generic.IList<Permission> GetPermissions(IList<System.Guid> ids);
         IList<Permission> GetByRoleId(string roleId);
+        IList<Permission> GetByUserGroupId(string userGroupId);
     }
 }

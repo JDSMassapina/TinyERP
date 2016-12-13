@@ -8,7 +8,7 @@
         System.Collections.Generic.IList<UserGroupListItemSummary> GetUserGroups();
         CreateUserGroupResponse Create(CreateUserGroupRequest request);
         void Delete(Guid id);
-        GetUserGroupResponse Get(Guid id);
+        GetUserGroupResponse GetUserGroup(Guid id);
         void Update(UpdateUserGroupRequest request);
     }
 }

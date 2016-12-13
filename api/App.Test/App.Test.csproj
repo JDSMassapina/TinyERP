@@ -71,6 +71,8 @@
     <Compile Include="Security\Permission\UpdatePermissionTest.cs" />
     <Compile Include="Security\Permission\CreatePermissionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\UserGroup\CreateUserGroupTest.cs" />
+    <Compile Include="Security\UserGroup\UpdateUserGroupTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Context\App.Context.csproj">

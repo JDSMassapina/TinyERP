@@ -23,7 +23,7 @@
             {
                 IUserGroupRepository userGroupRepository = IoC.Container.Resolve<IUserGroupRepository>(uow);
                 IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>(uow);
-                IList<Permission> permissions = permissionRepo.GetPermissions(request.PermissionIds);
+                IList<Permission> permissions = permissionRepo.GetPermissions(request.Permissions);
                 UserGroup userGroup = new UserGroup(request.Name, request.Description, permissions);
                 userGroupRepository.Add(userGroup);
                 uow.Commit();
@@ -35,13 +35,13 @@
         {
             if (string.IsNullOrWhiteSpace(request.Name))
             {
-                throw new App.Common.Validation.ValidationException("security.addOrUpdateUserGroup.validation.nameIsRequire");
+                throw new App.Common.Validation.ValidationException("security.addOrUpdateUserGroup.validation.nameIsRequired");
             }
 
             IUserGroupRepository repo = IoC.Container.Resolve<IUserGroupRepository>();
             if (repo.GetByName(request.Name) != null)
             {
-                throw new App.Common.Validation.ValidationException("security.addOrUpdateUserGroup.validation.nameAlreadyExist");
+                throw new App.Common.Validation.ValidationException("security.addOrUpdateUserGroup.validation.nameAlreadyExisted");
             }
         }
 
@@ -76,16 +76,16 @@
             }
         }
 
-        public GetUserGroupResponse Get(Guid id)
+        public GetUserGroupResponse GetUserGroup(Guid id)
         {
             IUserGroupRepository repository = IoC.Container.Resolve<IUserGroupRepository>();
             IPermissionRepository perRepo = IoC.Container.Resolve<IPermissionRepository>();
             UserGroup userGroup = repository.GetById(id.ToString(), "Permissions");
             GetUserGroupResponse response = ObjectHelper.Convert<GetUserGroupResponse>(userGroup);
-            response.PermissionIds = new List<Guid>();
+            response.Permissions = new List<Guid>();
             foreach (Permission per in userGroup.Permissions)
             {
-                response.PermissionIds.Add(per.Id);
+                response.Permissions.Add(per.Id);
             }
 
             return response;
@@ -111,9 +111,9 @@
 
         private void AddAddedPermission(UserGroup existedItem, UpdateUserGroupRequest request, IUnitOfWork uow)
         {
-            if (request.PermissionIds.Count == 0) { return; }
+            if (request.Permissions.Count == 0) { return; }
             IList<Guid> existPers = existedItem.Permissions.Select(item => item.Id).ToList();
-            IEnumerable<Guid> addedItems = request.PermissionIds.Except(existPers);
+            IEnumerable<Guid> addedItems = request.Permissions.Except(existPers);
             IPermissionRepository perRepo = IoC.Container.Resolve<IPermissionRepository>(uow);
             foreach (Guid item in addedItems)
             {
@@ -126,7 +126,7 @@
         {
             if (existedItem.Permissions.Count == 0) { return; }
             IList<Guid> existPers = existedItem.Permissions.Select(item => item.Id).ToList();
-            IEnumerable<Guid> removedItems = existPers.Except(request.PermissionIds);
+            IEnumerable<Guid> removedItems = existPers.Except(request.Permissions);
             foreach (Guid item in removedItems)
             {
                 Permission per = existedItem.Permissions.FirstOrDefault(perItem => perItem.Id == item);
@@ -138,13 +138,13 @@
         {
             if (request.Id == null || request.Id == Guid.Empty)
             {
-                throw new ValidationException("security.addOrUpdateUserGroup.validation.idIsInvalid");
+                throw new ValidationException("security.userGroups.validation.userGroupIdIsInvalid");
             }
 
             IUserGroupRepository repository = IoC.Container.Resolve<IUserGroupRepository>();
             if (repository.GetById(request.Id.ToString()) == null)
             {
-                throw new ValidationException("security.addOrUpdateUserGroup.validation.itemNotExist");
+                throw new ValidationException("security.userGroups.validation.userGroupNotExisted");
             }
 
             if (string.IsNullOrWhiteSpace(request.Name))

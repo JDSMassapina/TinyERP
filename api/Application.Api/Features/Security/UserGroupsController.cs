@@ -40,7 +40,7 @@
             try
             {
                 IUserGroupService service = IoC.Container.Resolve<IUserGroupService>();
-                GetUserGroupResponse role = service.Get(id);
+                GetUserGroupResponse role = service.GetUserGroup(id);
                 response.SetData(role);
             }
             catch (ValidationException ex)

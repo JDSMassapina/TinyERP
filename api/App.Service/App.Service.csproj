@@ -80,13 +80,13 @@
     <Compile Include="Security\UpdateRoleRequest.cs" />
     <Compile Include="Security\CreateRoleRequest.cs" />
     <Compile Include="Security\CreateRoleResponse.cs" />
-    <Compile Include="Security\CreateUserGroupRequest.cs" />
-    <Compile Include="Security\CreateUserGroupResponse.cs" />
+    <Compile Include="Security\UserGroup\CreateUserGroupRequest.cs" />
+    <Compile Include="Security\UserGroup\CreateUserGroupResponse.cs" />
     <Compile Include="Security\DeleteRoleResponse.cs" />
     <Compile Include="Security\GetRoleResponse.cs" />
     <Compile Include="Security\Permission\IPermissionService.cs" />
     <Compile Include="Security\IRoleService.cs" />
-    <Compile Include="Security\IUserGroupService.cs" />
+    <Compile Include="Security\UserGroup\IUserGroupService.cs" />
     <Compile Include="Security\Permission\PermissionAsKeyNamePair.cs" />
     <Compile Include="Security\RoleKeyNamePair.cs" />
     <Compile Include="Security\RoleListItemSummary.cs" />
