@@ -5,7 +5,7 @@
     <page-content>
         <form-default>
             <form-text-input [placeHolderText]=i18n.security.addOrUpdateUserGroup.inputName [labelText]=i18n.security.addOrUpdateUserGroup.name
-                [validation]="['security.addOrUpdateUserGroup.validation.nameIsRequire','security.addOrUpdateUserGroup.validation.nameAlreadyExist']"
+                [validation]="['security.addOrUpdateUserGroup.validation.nameIsRequired','security.addOrUpdateUserGroup.validation.nameAlreadyExisted']"
                 [(model)]=model.name>
             </form-text-input>
             <form-textarea [placeHolderText]=i18n.security.addOrUpdateUserGroup.inputDesc [labelText]=i18n.security.addOrUpdateUserGroup.desc [(model)]=model.description>
