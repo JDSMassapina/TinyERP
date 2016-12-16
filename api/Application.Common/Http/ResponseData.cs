@@ -13,6 +13,7 @@
         public ResponseData()
         {
             this.Errors = new List<ValidationError>();
+            this.Status = HttpStatusCode.OK;
         }
 
         public void SetStatus(System.Net.HttpStatusCode httpStatusCode)

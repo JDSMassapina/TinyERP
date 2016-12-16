@@ -10,11 +10,11 @@
     <page-content>
         <form-default>
             <form-text-input [placeHolderText]=i18n.inventory.addOrUpdateCategory.inputName [labelText]=i18n.inventory.addOrUpdateCategory.name
-                [validation]="['inventory.addOrUpdateCategory.validation.nameRequired','inventory.addOrUpdateCategory.validation.nameAlreadyExisted','inventory.addOrUpdateCategory.validation.fieldTooLong']"
+                [validation]="['inventory.addOrUpdateCategory.validation.nameRequired','inventory.addOrUpdateCategory.validation.nameAlreadyExisted','inventory.addOrUpdateCategory.validation.nameTooLong']"
                 [(model)]=model.name>
             </form-text-input>
             <form-textarea [placeHolderText]=i18n.inventory.addOrUpdateCategory.inputDesc [labelText]=i18n.inventory.addOrUpdateCategory.desc
-                [validation]="['inventory.addOrUpdateCategory.validation.fieldTooLong']" [(model)]=model.description>
+                [validation]="['inventory.addOrUpdateCategory.validation.descriptionTooLong']" [(model)]=model.description>
             </form-textarea>
             <form-footer>
                 <button (click)="onSaveClicked($event)" type="button" class="btn btn-primary">{{i18n.common.form.save}}</button>

@@ -19,7 +19,8 @@
             "nameRequired": "Please input name of Category",
             "nameAlreadyExisted": "This name is already existed. Please input another name",
             "categoryNotExisted": "Category not found",
-            "fieldTooLong": "Your input text is too long."
+            "nameTooLong": "Name is too long.",
+            "descriptionTooLong": "Description is too long."
         }
     },
     "unitOfMeasurements": {

@@ -70,7 +70,7 @@ gulp.task('copy-assets', function (done) {
 
     return gulp.src(config.index)
         .pipe(useref())
-        .pipe(gulpif('*.js', uglify()))
+        //.pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', cssnano()))
         .pipe(gulpif('!*.html', rev()))
         .pipe(revReplace())

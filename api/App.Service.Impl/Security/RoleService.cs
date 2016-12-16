@@ -11,7 +11,7 @@
     using App.Common.Validation;
     using App.Context;
     using System.Linq;
-
+    using App.Common.Helpers;
     internal class RoleService : IRoleService
     {
         public void CreateIfNotExist(IList<Role> roles)
@@ -63,9 +63,8 @@
                 Role role = new Role(request.Name, request.Description, permissions);
                 roleRepository.Add(role);
                 uow.Commit();
+                return ObjectHelper.Convert<CreateRoleResponse>(role);
             }
-
-            return new CreateRoleResponse();
         }
 
         private void Validate(CreateRoleRequest request)

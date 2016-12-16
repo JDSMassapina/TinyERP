@@ -14,9 +14,11 @@
         public override bool IsValueInRange(object value, object lowerBound, object upperBound)
         {
             string str = value as string;
+            int valueLength;
             int low = (int)lowerBound;
             int upper = (int)upperBound;
-            return !string.IsNullOrWhiteSpace(str) && str.Length >= low && str.Length <= upper;
+            valueLength = string.IsNullOrWhiteSpace(str) ? 0 : str.Length;
+            return valueLength >= low && valueLength <= upper;
         }
 
         public override bool IsMatch(object value, object evaluator)

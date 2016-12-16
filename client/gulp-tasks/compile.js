@@ -24,11 +24,11 @@ function compileTs(files, watchMode) {
     var res = gulp.src(allFiles, {
             base: '.'
         })
-        .pipe(tslint())
+        /*.pipe(tslint())
         .pipe(tslint.report('prose', {
             summarizeFailureOutput: true,
             emitError: !watchMode
-        }))
+        }))*/
         .pipe(preprocess())
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject))

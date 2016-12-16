@@ -242,6 +242,7 @@
     <Content Include="config\configuration.debug.config" />
     <Content Include="config\configuration.release.config" />
     <None Include="Project_Readme.html" />
+    <None Include="Properties\PublishProfiles\published.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Context\App.Context.csproj">

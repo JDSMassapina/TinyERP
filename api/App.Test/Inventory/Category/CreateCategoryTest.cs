@@ -65,7 +65,7 @@
             }
             catch (ValidationException ex)
             {
-                Assert.IsTrue(ex.HasExceptionKey("inventory.addOrUpdateCategory.validation.fieldTooLong"));
+                Assert.IsTrue(ex.HasExceptionKey("inventory.addOrUpdateCategory.validation.nameTooLong"));
             }
         }
 
@@ -81,7 +81,7 @@
             }
             catch (ValidationException ex)
             {
-                Assert.IsTrue(ex.HasExceptionKey("inventory.addOrUpdateCategory.validation.fieldTooLong"));
+                Assert.IsTrue(ex.HasExceptionKey("inventory.addOrUpdateCategory.validation.descriptionTooLong"));
             }
         }
 

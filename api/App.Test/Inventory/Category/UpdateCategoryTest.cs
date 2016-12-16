@@ -77,7 +77,7 @@
             }
             catch (ValidationException exception)
             {
-                Assert.IsTrue(exception.HasExceptionKey("inventory.addOrUpdateCategory.validation.fieldTooLong"));
+                Assert.IsTrue(exception.HasExceptionKey("inventory.addOrUpdateCategory.validation.nameTooLong"));
             }
         }
 
@@ -125,12 +125,12 @@
             }
             catch (ValidationException exception)
             {
-                Assert.IsTrue(exception.HasExceptionKey("inventory.addOrUpdateCategory.validation.fieldTooLong"));
+                Assert.IsTrue(exception.HasExceptionKey("inventory.addOrUpdateCategory.validation.descriptionTooLong"));
             }
         }
 
         [TestMethod]
-        public void Inventory_Category_UpdateCategory_ShouldGetException_WithInValidCategoryId()
+        public void Inventory_Category_UpdateCategory_ShouldGetException_WithEmptyCategoryId()
         {
             try
             {
@@ -146,7 +146,7 @@
             }
             catch (ValidationException exception)
             {
-                Assert.IsTrue(exception.HasExceptionKey("inventory.addOrUpdateCategory.validation.categoryIdIsInvalid"));
+                Assert.IsTrue(exception.HasExceptionKey("inventory.addOrUpdateCategory.validation.idRequired"));
             }
         }
 
