@@ -18,7 +18,7 @@
     {
         public CreateUserGroupResponse Create(CreateUserGroupRequest request)
         {
-            this.ValidateCreateRequest(request);
+            this.Validate(request);
             using (App.Common.Data.IUnitOfWork uow = new App.Common.Data.UnitOfWork(new App.Context.AppDbContext(IOMode.Write)))
             {
                 IUserGroupRepository userGroupRepository = IoC.Container.Resolve<IUserGroupRepository>(uow);
@@ -27,21 +27,36 @@
                 UserGroup userGroup = new UserGroup(request.Name, request.Description, permissions);
                 userGroupRepository.Add(userGroup);
                 uow.Commit();
-                return new CreateUserGroupResponse(userGroup);
+                return ObjectHelper.Convert<CreateUserGroupResponse>(userGroup);
             }
         }
 
-        private void ValidateCreateRequest(CreateUserGroupRequest request)
+        private void Validate(CreateUserGroupRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.Name))
+            IValidationException validationException = ValidationHelper.Validate(request);
+            validationException.ThrowIfError();
+            UserGroup userGroup = new UserGroup(request.Name, request.Description, null);
+            IUserGroupRepository userGroupRepo = IoC.Container.Resolve<IUserGroupRepository>();
+            this.ValidateCreateRequest(userGroup, userGroupRepo);
+        }
+
+        private void ValidateCreateRequest(UserGroup userGroup, IUserGroupRepository repo)
+        {
+            if (string.IsNullOrWhiteSpace(userGroup.Name))
             {
                 throw new App.Common.Validation.ValidationException("security.addOrUpdateUserGroup.validation.nameIsRequired");
             }
 
-            IUserGroupRepository repo = IoC.Container.Resolve<IUserGroupRepository>();
-            if (repo.GetByName(request.Name) != null)
+            if (repo.GetByName(userGroup.Name) != null)
             {
                 throw new App.Common.Validation.ValidationException("security.addOrUpdateUserGroup.validation.nameAlreadyExisted");
+            }
+
+            string key = App.Common.Helpers.UtilHelper.ToKey(userGroup.Name);
+            UserGroup userGroupByKey = repo.GetByKey(key);
+            if (userGroupByKey != null)
+            {
+                throw new ValidationException("security.addOrUpdateUserGroup.validation.keyAlreadyExisted");
             }
         }
 

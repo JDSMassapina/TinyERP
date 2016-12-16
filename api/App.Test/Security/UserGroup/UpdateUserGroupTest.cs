@@ -112,7 +112,8 @@
 
         private void UpdateUserGroupItem(Guid id, string name, string desc)
         {
-            UpdateUserGroupRequest request = new UpdateUserGroupRequest(id, name, desc);
+            string key = App.Common.Helpers.UtilHelper.ToKey(name);
+            UpdateUserGroupRequest request = new UpdateUserGroupRequest(id, name, key, desc);
             IUserGroupService service = IoC.Container.Resolve<IUserGroupService>();
             service.Update(request);
         }

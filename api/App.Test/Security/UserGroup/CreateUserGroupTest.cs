@@ -54,6 +54,25 @@
             }
         }
 
+        [TestMethod]
+        public void Security_UserGroup_CreateUserGroup_ShouldGetException_WithDuplicatedKey()
+        {
+            try
+            {
+                string newGuid = Guid.NewGuid().ToString("N");
+                string name = "Name of User Group" + newGuid;
+                string name1 = "Name_of_User_Group" + newGuid;
+                string desc = "Desc of Role";
+                this.CreateUserGroupItem(name, desc);
+                this.CreateUserGroupItem(name1, desc);
+                Assert.IsTrue(false);
+            }
+            catch (ValidationException ex)
+            {
+                Assert.IsTrue(ex.HasExceptionKey("security.addOrUpdateUserGroup.validation.keyAlreadyExisted"));
+            }
+        }
+
         private CreateUserGroupResponse CreateUserGroupItem(string name, string desc)
         {
             CreateUserGroupRequest request = new CreateUserGroupRequest(name, desc);
