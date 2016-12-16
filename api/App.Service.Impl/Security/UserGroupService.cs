@@ -167,6 +167,12 @@
                 throw new ValidationException("security.addOrUpdateUserGroup.validation.nameIsRequired");
             }
 
+            UserGroup userGroupByName = repository.GetByName(request.Name);
+            if (userGroupByName != null && userGroupByName.Id != request.Id)
+            {
+                throw new ValidationException("security.addOrUpdateUserGroup.validation.nameAlreadyExisted");
+            }
+
             string key = App.Common.Helpers.UtilHelper.ToKey(request.Name);
             UserGroup itemByKey = repository.GetByKey(key);
             if (itemByKey != null && itemByKey.Id != request.Id)

@@ -53,6 +53,22 @@
         }
 
         [TestMethod]
+        public void Security_UserGroup_UpdateUserGroup_ShouldGetException_WithDuplicatedName()
+        {
+            try
+            {
+                string name = this.userGroup2.Name;
+                string desc = "Desc of Role";
+                this.UpdateUserGroupItem(this.userGroup.Id, name, desc);
+                Assert.IsTrue(false);
+            }
+            catch (ValidationException ex)
+            {
+                Assert.IsTrue(ex.HasExceptionKey("security.addOrUpdateUserGroup.validation.nameAlreadyExisted"));
+            }
+        }
+
+        [TestMethod]
         public void Security_UserGroup_UpdateUserGroup_ShouldGetException_WithDuplicatedKey()
         {
             try
